@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="项目作品展示 - 王修的个人项目作品">
+  <title>项目作品 - 王修</title>
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <style>
+    .projects-header {
+      position: relative;
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--spacing-xl) var(--spacing-lg);
+    }
+    
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      flex-wrap: wrap;
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .filter-btn {
+      padding: var(--spacing-xs) var(--spacing-md);
+      background: transparent;
+      border: 1px solid var(--color-text-secondary);
+      border-radius: var(--border-radius-md);
+      color: var(--color-text-secondary);
+      font-family: inherit;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    
+    .filter-btn:hover,
+    .filter-btn.active {
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+    
+    .projects-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg) var(--spacing-xl);
+    }
+    
+    .no-projects {
+      text-align: center;
+      padding: var(--spacing-xl);
+      color: var(--color-text-secondary);
+    }
+
+    .project-detail-card {
+      background: var(--color-bg-secondary);
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      margin-bottom: var(--spacing-lg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    [data-theme="light"] .project-detail-card {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .project-header {
+      padding: var(--spacing-md);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    [data-theme="light"] .project-header {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .project-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      flex-wrap: wrap;
+      margin-bottom: var(--spacing-xs);
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+    }
+
+    .project-role {
+      display: inline-block;
+      padding: 2px 12px;
+      background: rgba(0, 212, 255, 0.1);
+      border-radius: var(--border-radius-sm);
+      font-size: 0.8rem;
+      color: var(--color-accent);
+    }
+
+    .project-title-large {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .project-tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-xs);
+    }
+
+    .project-body {
+      padding: var(--spacing-md);
+    }
+
+    .project-section {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .project-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-section-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      margin-bottom: var(--spacing-sm);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+    }
+
+    .project-section-title::before {
+      content: '';
+      width: 4px;
+      height: 16px;
+      background: var(--gradient-primary);
+      border-radius: 2px;
+    }
+
+    .project-section-content {
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    .project-work-item {
+      margin-bottom: var(--spacing-sm);
+      padding-left: var(--spacing-md);
+      position: relative;
+    }
+
+    .project-work-item::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+    }
+
+    .project-work-title {
+      font-weight: 500;
+      color: var(--color-text-primary);
+      margin-bottom: 4px;
+    }
+
+    .project-result-box {
+      background: rgba(0, 212, 255, 0.05);
+      border-left: 3px solid var(--color-accent);
+      padding: var(--spacing-md);
+      border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+    }
+
+    .project-images {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-md);
+    }
+
+    .project-image-item {
+      border-radius: var(--border-radius-md);
+      overflow: hidden;
+      aspect-ratio: 16/10;
+      background: var(--color-bg-primary);
+    }
+
+    .project-image-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-normal);
+    }
+
+    .project-image-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .honors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-lg);
+    }
+
+    .honor-card {
+      background: var(--color-bg-secondary);
+      border-radius: var(--border-radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all var(--transition-normal);
+    }
+
+    [data-theme="light"] .honor-card {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .honor-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .honor-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: var(--color-bg-primary);
+    }
+
+    .honor-content {
+      padding: var(--spacing-sm);
+      text-align: center;
+    }
+
+    .honor-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-lg);
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: var(--spacing-md);
+      right: var(--spacing-md);
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      font-size: 1.5rem;
+      transition: all var(--transition-fast);
+    }
+
+    .modal-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;"></canvas>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">王修</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">首页</a>
+      <a href="projects.html" class="nav-link active">项目</a>
+      <a href="honors.html" class="nav-link">荣誉</a>
+      <a href="index.html#contact" class="nav-link">联系</a>
+      <button class="theme-toggle" aria-label="切换主题">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" style="display: none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <section class="projects-header">
+    <h1 class="hero-title scroll-animate">我的项目</h1>
+    <p class="hero-subtitle scroll-animate stagger-1">探索我的作品与技术实践</p>
+    <div class="scroll-indicator">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </div>
+  </section>
+
+  <section class="projects-container">
+    <div class="filter-bar scroll-animate">
+      <button class="filter-btn active" data-filter="all">全部</button>
+      <button class="filter-btn" data-filter="cv">计算机视觉</button>
+      <button class="filter-btn" data-filter="ai">AI/机器学习</button>
+      <button class="filter-btn" data-filter="system">系统开发</button>
+    </div>
+
+    <div id="projects-grid">
+      <!-- 项目1: 智能除草机 -->
+      <div class="project-detail-card scroll-animate" data-type="cv">
+        <div class="project-header">
+          <div class="project-meta">
+            <span>📅 2024年9月 — 2025年6月</span>
+            <span class="project-role">后端开发工程师</span>
+          </div>
+          <h2 class="project-title-large">基于计算机视觉的智能除草机</h2>
+          <div class="project-tech-stack">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">华为昇腾</span>
+            <span class="project-tag">YOLO</span>
+            <span class="project-tag">OpenCV</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-section">
+            <h3 class="project-section-title">项目背景</h3>
+            <p class="project-section-content">
+              该项目是校方与隶属于北大荒农垦集团有限公司的黑龙江省农垦科学院农业工程所的合作课题，主要针对北方大田作物环境下人工除杂成本高与自动化程度较低的问题，利用深度学习与端侧部署技术，精准识别秧苗与杂草，实现自动对行与精准除杂功能，解决苗间除草自动化程度较低与除杂精度较低等难题。
+            </p>
+          </div>
+          
+          <div class="project-section">
+            <h3 class="project-section-title">主要工作</h3>
+            <div class="project-section-content">
+              <div class="project-work-item">
+                <div class="project-work-title">数据增强</div>
+                <p>通过分析视频流中的视频帧构建初始图像数据集，并利用OpenCV框架实现自定义图像增强（曝光调整、高斯噪声、椒盐噪声、裁剪、旋转、边缘增强），提高数据集质量。</p>
+              </div>
+              <div class="project-work-item">
+                <div class="project-work-title">算法建模</div>
+                <p>在模型研发阶段，运用NVIDIA RTX A6000计算平台完成YOLO（v8、v10、v11）模型的多版本对比、训练与调优，同时自研的杂草中心像素点提取算法，显著提升了刀具操作精度。</p>
+              </div>
+              <div class="project-work-item">
+                <div class="project-work-title">端侧部署</div>
+                <p>在华为Atlas 200I DKA2开发板上成功自研实现YOLO11、YOLOv10、YOLOv8模型部署，并创新性地建立了端侧模型推理评价体系，解决在端侧设备中无法验证模型精度的问题。</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-section">
+            <h3 class="project-section-title">项目成果</h3>
+            <div class="project-result-box">
+              <p>完成智能除草机视觉识别系统开发，实现秧苗与杂草识别与精准除草。在昇腾Atlas 200I DKA2端侧部署最优YOLO11模型，达到<strong>准确率85.3%、召回率75.9%、20FPS实时推理速度</strong>。</p>
+            </div>
+          </div>
+
+          <div class="project-section">
+            <h3 class="project-section-title">项目图片</h3>
+            <div class="project-images">
+              <div class="project-image-item">
+                <img src="assets/images/projects/weeding-machine/除草机实习.jpg" alt="除草机实习" onclick="openModal(this.src)">
+              </div>
+              <div class="project-image-item">
+                <img src="assets/images/projects/weeding-machine/除草机华为工程师.jpg" alt="除草机华为工程师" onclick="openModal(this.src)">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 项目2: 电能表时钟电池 -->
+      <div class="project-detail-card scroll-animate" data-type="ai">
+        <div class="project-header">
+          <div class="project-meta">
+            <span>📅 2025年12月 — 2026年4月</span>
+            <span class="project-role">核心成员</span>
+          </div>
+          <h2 class="project-title-large">电能表时钟电池可靠性评价关键技术及在高严寒地区的应用研究</h2>
+          <div class="project-tech-stack">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">BPNN</span>
+            <span class="project-tag">Qt</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-section">
+            <h3 class="project-section-title">项目背景</h3>
+            <p class="project-section-content">
+              该项目是校方与烟台东方威思顿有限公司的合作课题，主要针对电能表时钟电池的性能和可靠性问题，重点研究时钟电池钝化膜的快速消除、电池容量检测、时钟电池可靠性评价三大关键技术。
+            </p>
+          </div>
+          
+          <div class="project-section">
+            <h3 class="project-section-title">主要工作</h3>
+            <div class="project-section-content">
+              <div class="project-work-item">
+                <div class="project-work-title">数据增强</div>
+                <p>面向电池容量数据稀疏及小样本问题，设计基于多插值与LOOCV验证的安全数据增强方法，在保证数据分布合理性的前提下实现样本扩展，缓解过拟合并提升模型泛化能力。</p>
+              </div>
+              <div class="project-work-item">
+                <div class="project-work-title">特征提取</div>
+                <p>基于电池在不同容量阶段的电压响应曲线，挖掘关键特征参数并构建容量敏感特征集合，建立电压特性与容量演化之间的关联机制。</p>
+              </div>
+              <div class="project-work-item">
+                <div class="project-work-title">算法建模</div>
+                <p>构建基于BPNN的容量预测模型，实现容量检测任务的非线性建模与精确预测，支撑电池剩余容量检测与健康状态评估应用。</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-section">
+            <h3 class="project-section-title">项目成果</h3>
+            <div class="project-result-box">
+              <p>完成电能表时钟电池剩余容量检测系统开发，并在Qt平台实现部署。BPNN模型指标为<strong>MAE=0.8507、MSE=1.2631、MAPE=1.34%</strong>，满足高寒地区电池可靠性评价需求，项目于2026年5月完成验收交付。</p>
+            </div>
+          </div>
+
+          <div class="project-section">
+            <h3 class="project-section-title">项目图片</h3>
+            <div class="project-images">
+              <div class="project-image-item">
+                <img src="assets/images/projects/battery-system/时钟电池实习.jpg" alt="时钟电池实习" onclick="openModal(this.src)">
+              </div>
+              <div class="project-image-item">
+                <img src="assets/images/projects/battery-system/时钟电池.jpg" alt="时钟电池" onclick="openModal(this.src)">
+              </div>
+              <div class="project-image-item">
+                <img src="assets/images/projects/battery-system/时钟电池1.jpg" alt="时钟电池1" onclick="openModal(this.src)">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 项目3: 智慧工地安全监测平台 -->
+      <div class="project-detail-card scroll-animate" data-type="system">
+        <div class="project-header">
+          <div class="project-meta">
+            <span>📅 2024年9月 — 2026年6月</span>
+            <span class="project-role">负责人</span>
+          </div>
+          <h2 class="project-title-large">工地智慧安全态势感知与监测平台</h2>
+          <div class="project-tech-stack">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">YOLO</span>
+            <span class="project-tag">Qt</span>
+            <span class="project-tag">C++</span>
+            <span class="project-tag">OpenVINO</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-section">
+            <h3 class="project-section-title">项目背景</h3>
+            <p class="project-section-content">
+              项目旨在开发一种先进的低成本的无人机监控系统，以应对施工现场的多重安全挑战，例如火灾、人员着装不达标等，同时降低无人机的适配成本，使小型无人机也可完成监测任务。
+            </p>
+          </div>
+          
+          <div class="project-section">
+            <h3 class="project-section-title">主要工作</h3>
+            <div class="project-section-content">
+              <div class="project-work-item">
+                <div class="project-work-title">数据构建</div>
+                <p>面向多类别异常检测任务，构建多源开源数据集并完成数据清洗与重构，按照标准比例划分训练集、验证集与测试集，形成规范化模型训练数据体系。</p>
+              </div>
+              <div class="project-work-item">
+                <div class="project-work-title">模型部署</div>
+                <p>基于Qt构建可视化推理系统，支持视频流输入与检测结果动态展示，实现异常的实时加载与检测调用。</p>
+              </div>
+              <div class="project-work-item">
+                <div class="project-work-title">模型加速</div>
+                <p>基于OpenVINO加速库优化模型在CPU环境下的推理速度，满足实际应用场景的实时性需求。</p>
+              </div>
+              <div class="project-work-item">
+                <div class="project-work-title">硬件交互</div>
+                <p>系统监测到安全隐患后，与树莓派通信并同时发送警报信号给蜂鸣器，完成从监测到预警响应效果。</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-section">
+            <h3 class="project-section-title">项目成果</h3>
+            <div class="project-result-box">
+              <p>完成智慧工地安全监测平台研发，实现异常识别、实时预警与设备联动。YOLO模型指标为<strong>准确率88.0%、召回率63.6%</strong>，实现监测-预警-处置-反馈全链路开发，项目于2026年6月结题。</p>
+            </div>
+          </div>
+
+          <div class="project-section">
+            <h3 class="project-section-title">项目图片</h3>
+            <div class="project-images">
+              <div class="project-image-item">
+                <img src="assets/images/projects/safety-platform/safety-platform.jpg" alt="安全监测平台" onclick="openModal(this.src)">
+              </div>
+              <div class="project-image-item">
+                <img src="assets/images/projects/safety-platform/工地训练平台.jpg" alt="工地训练平台" onclick="openModal(this.src)">
+              </div>
+              <div class="project-image-item">
+                <img src="assets/images/projects/safety-platform/工地软著.jpg" alt="软件著作权" onclick="openModal(this.src)">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="text-align: center; padding: var(--spacing-lg); color: var(--color-text-secondary); border-top: 1px solid rgba(255, 255, 255, 0.1);">
+    <a href="index.html" style="display: inline-flex; align-items: center; gap: var(--spacing-xs); margin-bottom: var(--spacing-sm);">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+      返回首页
+    </a>
+    <p>&copy; 2026 王修. All rights reserved.</p>
+  </footer>
+
+  <!-- 图片模态框 -->
+  <div class="modal" id="imageModal" onclick="closeModal()">
+    <span class="modal-close">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+  <script>
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-detail-card');
+    
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const filter = btn.dataset.filter;
+        
+        projectCards.forEach(card => {
+          if (filter === 'all' || card.dataset.type === filter) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    function openModal(src) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      modal.classList.add('active');
+      modalImg.src = src;
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.classList.remove('active');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>

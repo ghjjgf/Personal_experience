@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="极简科技风开发者个人主页 - 展示项目作品、技能结构和联系方式">
+  <meta name="keywords" content="开发者, 个人主页, 前端, 后端, 全栈">
+  <meta property="og:title" content="开发者个人主页">
+  <meta property="og:description" content="极简科技风开发者个人主页">
+  <meta property="og:type" content="website">
+  <title>王修 - 后端开发工程师</title>
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <canvas id="particles-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;"></canvas>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Dev</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active">首页</a>
+      <a href="projects.html" class="nav-link">项目</a>
+      <a href="honors.html" class="nav-link">荣誉</a>
+      <a href="#contact" class="nav-link">联系</a>
+      <button class="theme-toggle" aria-label="切换主题">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" style="display: none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <img src="assets/images/avatar.jpg" alt="头像" class="hero-avatar scroll-animate">
+      <h1 class="hero-title scroll-animate stagger-1">王修</h1>
+      <p class="hero-subtitle scroll-animate stagger-2">后端开发工程师 / 哈尔滨理工大学</p>
+      <p class="hero-description scroll-animate stagger-3">
+        熟悉C/C++编程语言，掌握面向对象编程思想。熟悉Linux操作系统及IO多路复用技术，具备计算机视觉模型训练与部署能力。善于将理论知识与工程实践相结合，具备较强的动手能力和业务能力。
+      </p>
+      <div class="hero-social scroll-animate stagger-4">
+        <a href="https://github.com/ghjjgf" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <h2 class="section-title scroll-animate">精选项目</h2>
+    <div class="projects-grid">
+      <div class="project-card scroll-animate stagger-1">
+        <img class="project-image" src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&h=600&fit=crop" alt="智能除草机" style="width: 100%; height: 200px; object-fit: cover;">
+        <div class="project-content">
+          <h3 class="project-title">智能除草机视觉系统</h3>
+          <p class="project-description">基于计算机视觉的智能除草机，利用深度学习与端侧部署技术，精准识别秧苗与杂草，实现自动对行与精准除杂功能。</p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">YOLO</span>
+            <span class="project-tag">华为昇腾</span>
+          </div>
+          <a href="projects.html" class="project-link">
+            查看详情
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="project-card scroll-animate stagger-2">
+        <img class="project-image" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop" alt="电能表电池" style="width: 100%; height: 200px; object-fit: cover;">
+        <div class="project-content">
+          <h3 class="project-title">电能表时钟电池可靠性评价</h3>
+          <p class="project-description">研究时钟电池钝化膜的快速消除、电池容量检测、时钟电池可靠性评价三大关键技术，基于BPNN实现容量预测。</p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">BPNN</span>
+            <span class="project-tag">Qt</span>
+          </div>
+          <a href="projects.html" class="project-link">
+            查看详情
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="project-card scroll-animate stagger-3">
+        <img class="project-image" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop" alt="智慧工地" style="width: 100%; height: 200px; object-fit: cover;">
+        <div class="project-content">
+          <h3 class="project-title">智慧工地安全监测平台</h3>
+          <p class="project-description">基于无人机监控系统的智慧工地安全态势感知平台，实现火灾检测、人员着装检测等异常识别与实时预警。</p>
+          <div class="project-tags">
+            <span class="project-tag">YOLO</span>
+            <span class="project-tag">OpenVINO</span>
+            <span class="project-tag">C++</span>
+          </div>
+          <a href="projects.html" class="project-link">
+            查看详情
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: var(--spacing-lg);">
+      <a href="projects.html" class="project-link" style="font-size: 1.125rem;">
+        查看所有项目
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <section class="skills-section" id="skills">
+    <h2 class="section-title scroll-animate">专业技能</h2>
+    
+    <div class="skills-category scroll-animate stagger-1">
+      <h3 class="skills-category-title">编程语言</h3>
+      <div class="skills-tags">
+        <span class="skill-tag">C/C++</span>
+        <span class="skill-tag">C++11</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">面向对象编程</span>
+      </div>
+    </div>
+
+    <div class="skills-category scroll-animate stagger-2">
+      <h3 class="skills-category-title">后端 & 系统</h3>
+      <div class="skills-tags">
+        <span class="skill-tag">Linux</span>
+        <span class="skill-tag">IO多路复用</span>
+        <span class="skill-tag">select/poll/epoll</span>
+        <span class="skill-tag">Qt框架</span>
+        <span class="skill-tag">信号与槽</span>
+      </div>
+    </div>
+
+    <div class="skills-category scroll-animate stagger-3">
+      <h3 class="skills-category-title">计算机视觉 & AI</h3>
+      <div class="skills-tags">
+        <span class="skill-tag">YOLO</span>
+        <span class="skill-tag">OpenVINO</span>
+        <span class="skill-tag">华为昇腾</span>
+        <span class="skill-tag">模型训练</span>
+        <span class="skill-tag">端侧部署</span>
+        <span class="skill-tag">BPNN</span>
+      </div>
+    </div>
+
+    <div class="skills-category scroll-animate stagger-4">
+      <h3 class="skills-category-title">数据结构 & 算法</h3>
+      <div class="skills-tags">
+        <span class="skill-tag">数据结构</span>
+        <span class="skill-tag">B+树</span>
+        <span class="skill-tag">红黑树</span>
+        <span class="skill-tag">排序算法</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="honors">
+    <h2 class="section-title scroll-animate">荣誉证书</h2>
+    <p class="contact-description scroll-animate stagger-1" style="text-align: left; margin-bottom: var(--spacing-md);">
+      在校期间获得的荣誉与奖项
+    </p>
+    <div class="honors-preview scroll-animate stagger-2">
+      <div class="honor-badge">
+        <span class="honor-icon">🏆</span>
+        <span class="honor-text">2024年"挑战杯"大学生创业计划竞赛校级特等奖</span>
+      </div>
+      <div class="honor-badge">
+        <span class="honor-icon">🥈</span>
+        <span class="honor-text">2024年全国大学生数学建模省级三等奖</span>
+      </div>
+      <div class="honor-badge">
+        <span class="honor-icon">🤖</span>
+        <span class="honor-text">2025年中国机器人及人工智能大赛省级三等奖</span>
+      </div>
+      <div class="honor-badge">
+        <span class="honor-icon">📜</span>
+        <span class="honor-text">2025年公开发明专利两项</span>
+      </div>
+      <div class="honor-badge">
+        <span class="honor-icon">🎓</span>
+        <span class="honor-text">2025年大学生创新创业训练计划项目省级立项</span>
+      </div>
+      <div class="honor-badge">
+        <span class="honor-icon">💰</span>
+        <span class="honor-text">2024-2026年多次获得学业奖学金</span>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: var(--spacing-md);">
+      <a href="honors.html" class="project-link" style="font-size: 1rem;">
+        查看所有荣誉证书
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <h2 class="section-title scroll-animate">联系我</h2>
+    <p class="contact-description scroll-animate stagger-1">
+      有项目想法或合作机会？欢迎随时联系我。
+    </p>
+    <div class="contact-links scroll-animate stagger-2">
+      <a href="mailto:2816290589@qq.com" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2h-16c-1.1 0-2-.9-2-2v-12c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+        2816290589@qq.com
+      </a>
+      <a href="tel:18042885325" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+        </svg>
+        18042885325
+      </a>
+      <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+        GitHub
+      </a>
+    </div>
+  </section>
+
+  <footer style="text-align: center; padding: var(--spacing-lg); color: var(--color-text-secondary); border-top: 1px solid rgba(255, 255, 255, 0.1);">
+    <p>&copy; 2026 王修. All rights reserved.</p>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

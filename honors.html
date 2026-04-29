@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="荣誉证书 - 王修的个人荣誉展示">
+  <title>荣誉证书 - 王修</title>
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <style>
+    .honors-header {
+      position: relative;
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--spacing-xl) var(--spacing-lg);
+    }
+
+    .honors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-lg);
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--spacing-lg);
+    }
+
+    .honor-card {
+      background: var(--color-bg-secondary);
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all var(--transition-normal);
+      cursor: pointer;
+    }
+
+    [data-theme="light"] .honor-card {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .honor-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .honor-image-container {
+      position: relative;
+      width: 100%;
+      padding-top: 141%;
+      background: var(--color-bg-primary);
+      overflow: hidden;
+    }
+
+    .honor-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-normal);
+    }
+
+    .honor-card:hover .honor-image {
+      transform: scale(1.05);
+    }
+
+    .honor-content {
+      padding: var(--spacing-md);
+      text-align: center;
+    }
+
+    .honor-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .honor-date {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-lg);
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      border-radius: var(--border-radius-md);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: var(--spacing-md);
+      right: var(--spacing-md);
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      font-size: 1.5rem;
+      transition: all var(--transition-fast);
+      border: none;
+    }
+
+    .modal-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+
+    .modal-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      font-size: 1.5rem;
+      transition: all var(--transition-fast);
+      border: none;
+    }
+
+    .modal-nav:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .modal-prev {
+      left: var(--spacing-md);
+    }
+
+    .modal-next {
+      right: var(--spacing-md);
+    }
+
+    .modal-counter {
+      position: absolute;
+      bottom: var(--spacing-md);
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 0.9rem;
+      background: rgba(0, 0, 0, 0.5);
+      padding: var(--spacing-xs) var(--spacing-md);
+      border-radius: var(--border-radius-md);
+    }
+
+    @media (max-width: 768px) {
+      .honors-grid {
+        grid-template-columns: 1fr;
+        padding: var(--spacing-md);
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;"></canvas>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">王修</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">首页</a>
+      <a href="projects.html" class="nav-link">项目</a>
+      <a href="honors.html" class="nav-link active">荣誉</a>
+      <a href="index.html#contact" class="nav-link">联系</a>
+      <button class="theme-toggle" aria-label="切换主题">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" style="display: none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <section class="honors-header">
+    <h1 class="hero-title scroll-animate">荣誉证书</h1>
+    <p class="hero-subtitle scroll-animate stagger-1">点击图片查看大图，支持左右切换</p>
+    <div class="scroll-indicator">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </div>
+  </section>
+
+  <section class="honors-grid">
+    <div class="honor-card scroll-animate" onclick="openModal(0)">
+      <div class="honor-image-container">
+        <img class="honor-image" src="assets/images/projects/honors/挑战杯特等奖.jpg" alt="挑战杯特等奖">
+      </div>
+      <div class="honor-content">
+        <h3 class="honor-title">"挑战杯"大学生创业计划竞赛</h3>
+        <p class="honor-date">校级特等奖 · 2024年</p>
+      </div>
+    </div>
+
+    <div class="honor-card scroll-animate stagger-1" onclick="openModal(1)">
+      <div class="honor-image-container">
+        <img class="honor-image" src="assets/images/projects/honors/数学建模国赛.jpg" alt="数学建模">
+      </div>
+      <div class="honor-content">
+        <h3 class="honor-title">全国大学生数学建模竞赛</h3>
+        <p class="honor-date">省级三等奖 · 2024年</p>
+      </div>
+    </div>
+
+    <div class="honor-card scroll-animate stagger-2" onclick="openModal(2)">
+      <div class="honor-image-container">
+        <img class="honor-image" src="assets/images/projects/honors/人工智能大赛三等奖.png" alt="人工智能大赛">
+      </div>
+      <div class="honor-content">
+        <h3 class="honor-title">中国机器人及人工智能大赛</h3>
+        <p class="honor-date">省级三等奖 · 2025年</p>
+      </div>
+    </div>
+
+    <div class="honor-card scroll-animate stagger-3" onclick="openModal(3)">
+      <div class="honor-image-container">
+        <img class="honor-image" src="assets/images/projects/honors/发明专利1公开证明2025.11.14.jpg" alt="发明专利1">
+      </div>
+      <div class="honor-content">
+        <h3 class="honor-title">发明专利公开证明 (一)</h3>
+        <p class="honor-date">2025年11月</p>
+      </div>
+    </div>
+
+    <div class="honor-card scroll-animate stagger-4" onclick="openModal(4)">
+      <div class="honor-image-container">
+        <img class="honor-image" src="assets/images/projects/honors/发明专利2公开证明2025.9.9.jpg" alt="发明专利2">
+      </div>
+      <div class="honor-content">
+        <h3 class="honor-title">发明专利公开证明 (二)</h3>
+        <p class="honor-date">2025年9月</p>
+      </div>
+    </div>
+
+    <div class="honor-card scroll-animate stagger-5" onclick="openModal(5)">
+      <div class="honor-image-container">
+        <img class="honor-image" src="assets/images/projects/honors/奖学金2.jpg" alt="奖学金">
+      </div>
+      <div class="honor-content">
+        <h3 class="honor-title">学业奖学金</h3>
+        <p class="honor-date">2024-2026年</p>
+      </div>
+    </div>
+
+    <div class="honor-card scroll-animate stagger-6" onclick="openModal(6)">
+      <div class="honor-image-container">
+        <img class="honor-image" src="assets/images/projects/honors/2024-2025年度第二学期校级三等奖学金.jpg" alt="三等奖学金">
+      </div>
+      <div class="honor-content">
+        <h3 class="honor-title">校级三等奖学金</h3>
+        <p class="honor-date">2024-2025学年第二学期</p>
+      </div>
+    </div>
+
+    <div class="honor-card scroll-animate stagger-7" onclick="openModal(7)">
+      <div class="honor-image-container">
+        <img class="honor-image" src="assets/images/projects/honors/优秀共青团员证书.jpg" alt="优秀共青团员">
+      </div>
+      <div class="honor-content">
+        <h3 class="honor-title">优秀共青团员</h3>
+        <p class="honor-date">2025年</p>
+      </div>
+    </div>
+  </section>
+
+  <footer style="text-align: center; padding: var(--spacing-lg); color: var(--color-text-secondary); border-top: 1px solid rgba(255, 255, 255, 0.1);">
+    <a href="index.html" style="display: inline-flex; align-items: center; gap: var(--spacing-xs); margin-bottom: var(--spacing-sm);">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+      返回首页
+    </a>
+    <p>&copy; 2026 王修. All rights reserved.</p>
+  </footer>
+
+  <!-- 图片模态框 -->
+  <div class="modal" id="imageModal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <button class="modal-nav modal-prev" onclick="prevImage()">❮</button>
+    <button class="modal-nav modal-next" onclick="nextImage()">❯</button>
+    <img class="modal-content" id="modalImage">
+    <div class="modal-counter" id="modalCounter">1 / 8</div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+  <script>
+    const honorImages = [
+      'assets/images/projects/honors/挑战杯特等奖.jpg',
+      'assets/images/projects/honors/数学建模国赛.jpg',
+      'assets/images/projects/honors/人工智能大赛三等奖.png',
+      'assets/images/projects/honors/发明专利1公开证明2025.11.14.jpg',
+      'assets/images/projects/honors/发明专利2公开证明2025.9.9.jpg',
+      'assets/images/projects/honors/奖学金2.jpg',
+      'assets/images/projects/honors/2024-2025年度第二学期校级三等奖学金.jpg',
+      'assets/images/projects/honors/优秀共青团员证书.jpg'
+    ];
+
+    let currentIndex = 0;
+
+    function openModal(index) {
+      currentIndex = index;
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      const modalCounter = document.getElementById('modalCounter');
+      
+      modal.classList.add('active');
+      modalImg.src = honorImages[index];
+      modalCounter.textContent = `${index + 1} / ${honorImages.length}`;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + honorImages.length) % honorImages.length;
+      document.getElementById('modalImage').src = honorImages[currentIndex];
+      document.getElementById('modalCounter').textContent = `${currentIndex + 1} / ${honorImages.length}`;
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % honorImages.length;
+      document.getElementById('modalImage').src = honorImages[currentIndex];
+      document.getElementById('modalCounter').textContent = `${currentIndex + 1} / ${honorImages.length}`;
+    }
+
+    document.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('imageModal');
+      if (!modal.classList.contains('active')) return;
+      
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextImage();
+    });
+
+    document.getElementById('imageModal').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        closeModal();
+      }
+    });
+
+    window.openModal = openModal;
+    window.closeModal = closeModal;
+    window.prevImage = prevImage;
+    window.nextImage = nextImage;
+  </script>
+</body>
+</html>
