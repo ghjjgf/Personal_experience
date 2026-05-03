@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王修 - 个人主页</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container nav-inner">
+        <a href="#hero" class="nav-logo">WX</a>
+        <ul class="nav-links">
+            <li><a href="#projects">项目</a></li>
+            <li><a href="#honors">荣誉</a></li>
+            <li><a href="#about">关于</a></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<section id="hero" class="hero">
+    <div class="container">
+        <div class="hero-tag">Backend Developer</div>
+        <h1 class="hero-name">王修</h1>
+        <p class="hero-title">后端开发工程师</p>
+        <p class="hero-bio">软件工程专业在读本科生，专注于后端开发与计算机视觉领域，具备从算法研发到端侧部署的完整项目经验。</p>
+        <div class="hero-contact">
+            <a href="mailto:2816290589@qq.com" class="contact-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                2816290589@qq.com
+            </a>
+            <a href="tel:18042885325" class="contact-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                18042885325
+            </a>
+            <span class="contact-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                哈尔滨
+            </span>
+        </div>
+        <div class="hero-meta">
+            <span class="meta-badge">哈尔滨理工大学</span>
+            <span class="meta-badge">软件工程 · 本科</span>
+            <span class="meta-badge">2005.06</span>
+        </div>
+    </div>
+</section>
+
+<section id="projects" class="section">
+    <div class="container">
+        <h2 class="section-title">项目经验</h2>
+        <p class="section-subtitle">从算法研发到工程部署的完整实践</p>
+
+        <div class="projects-grid">
+            <article class="project-card">
+                <div class="project-header">
+                    <span class="project-period">2025.12 — 2026.04</span>
+                    <span class="project-role">核心成员</span>
+                </div>
+                <h3 class="project-name">电能表时钟电池可靠性评价关键技术及在高严寒地区的应用研究</h3>
+                <p class="project-bg">校方与烟台东方威思顿有限公司合作课题，针对电能表时钟电池的性能和可靠性问题，重点研究时钟电池钝化膜快速消除、电池容量检测、时钟电池可靠性评价三大关键技术。</p>
+                <div class="project-tech">
+                    <span>Python</span><span>BPNN</span><span>Qt</span>
+                </div>
+                <ul class="project-details">
+                    <li>设计基于多插值与LOOCV验证的安全数据增强方法，缓解小样本问题</li>
+                    <li>挖掘电压响应曲线关键特征参数，建立电压特性与容量演化的关联机制</li>
+                    <li>构建基于BPNN的容量预测模型，实现非线性建模与精确预测</li>
+                </ul>
+                <div class="project-result">
+                    <span class="result-label">成果</span>
+                    MAE=0.8507 · MSE=1.2631 · MAPE=1.34% — 项目于2026年5月完成验收交付
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-header">
+                    <span class="project-period">2024.09 — 2025.01</span>
+                    <span class="project-role">核心成员</span>
+                </div>
+                <h3 class="project-name">智能除草机视觉识别系统</h3>
+                <p class="project-bg">面向智能农机应用场景，研究秧苗与杂草的精准识别与定位技术，解决传统秧苗间除草自动化程度较低与除杂精度较低等难题。</p>
+                <div class="project-tech">
+                    <span>Python</span><span>YOLOv8/v10/v11</span><span>OpenCV</span><span>Atlas200I DK A2</span>
+                </div>
+                <ul class="project-details">
+                    <li>利用OpenCV实现自定义图像增强（曝光调整、噪声、裁剪、旋转、边缘增强）</li>
+                    <li>在NVIDIA RTX A6000上完成YOLO多版本对比训练与调优，自研杂草中心像素点提取算法</li>
+                    <li>在华为Atlas200I DK A2上实现YOLO系列模型部署，创新建立端侧模型推理评价体系</li>
+                </ul>
+                <div class="project-result">
+                    <span class="result-label">成果</span>
+                    准确率85.3% · 召回率75.9% · 20FPS实时推理
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-header">
+                    <span class="project-period">2024.09 — 2026.06</span>
+                    <span class="project-role">负责人</span>
+                </div>
+                <h3 class="project-name">工地智慧安全态势感知与监测平台</h3>
+                <p class="project-bg">开发低成本无人机监控系统，应对施工现场多重安全挑战（火灾、人员着装不达标等），降低无人机适配成本，使小型无人机也可完成监测任务。</p>
+                <div class="project-tech">
+                    <span>Python</span><span>YOLO</span><span>Qt</span><span>C++</span><span>OpenVINO</span>
+                </div>
+                <ul class="project-details">
+                    <li>构建多源开源数据集，完成数据清洗与重构，标准化训练/验证/测试集划分</li>
+                    <li>基于Qt构建可视化推理系统，支持视频流输入与检测结果动态展示</li>
+                    <li>基于OpenVINO加速库优化CPU推理速度，满足实时性需求</li>
+                    <li>与树莓派通信并发送警报信号给蜂鸣器，完成监测-预警-处置-反馈全链路</li>
+                </ul>
+                <div class="project-result">
+                    <span class="result-label">成果</span>
+                    准确率88.0% · 召回率63.6% — 项目于2026年6月结题
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section id="honors" class="section section-alt">
+    <div class="container">
+        <h2 class="section-title">荣誉奖励</h2>
+        <p class="section-subtitle">在竞赛与学术中持续突破</p>
+
+        <div class="honors-grid">
+            <div class="honor-card">
+                <div class="honor-year">2026</div>
+                <span class="honor-item">学业二等奖学金</span>
+            </div>
+            <div class="honor-card">
+                <div class="honor-year">2025</div>
+                <span class="honor-item">中国机器人及人工智能大赛省级三等奖</span>
+                <span class="honor-item">大学生创新创业训练计划项目省级立项</span>
+                <span class="honor-item">公开发明专利两项</span>
+                <span class="honor-item">学业三等奖学金</span>
+            </div>
+            <div class="honor-card">
+                <div class="honor-year">2024</div>
+                <span class="honor-item">全国大学生数学建模省级三等奖</span>
+                <span class="honor-item">"挑战杯"大学生创业计划竞赛校级特等奖</span>
+                <span class="honor-item">学业二等奖学金</span>
+                <span class="honor-item">六级证书 (CET-6)</span>
+            </div>
+            <div class="honor-card">
+                <div class="honor-year">2023</div>
+                <span class="honor-item">院级程序设计竞赛二等奖</span>
+                <span class="honor-item">第六届传智杯程序设计赛道初赛一等奖</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="section">
+    <div class="container">
+        <h2 class="section-title">关于我</h2>
+        <div class="about-content">
+            <p>具备突出的学习能力和钻研精神，善于将理论知识与工程实践相结合，面对技术难题能够虚心请教、深入思考。</p>
+            <p>从大一开始在实验室参与多项从可行可信调研到合同签订，最终验收交付并落地的校企合作课题，具备较强的动手能力和业务能力。</p>
+            <p>无论是熬夜通宵开发还是钻研课题难点，都能保持较强的毅力完成，直至问题解决。</p>
+        </div>
+
+        <div class="skill-tags">
+            <h3 class="skill-tags-title">技术能力</h3>
+            <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">C++</span>
+                <span class="tag">Qt</span>
+                <span class="tag">OpenCV</span>
+                <span class="tag">YOLO</span>
+                <span class="tag">OpenVINO</span>
+                <span class="tag">BPNN</span>
+                <span class="tag">PyTorch</span>
+                <span class="tag">端侧部署</span>
+                <span class="tag">模型加速</span>
+                <span class="tag">数据增强</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2026 王修. All Rights Reserved.</p>
+        <div class="footer-links">
+            <a href="mailto:2816290589@qq.com">Email</a>
+            <a href="tel:18042885325">Phone</a>
+        </div>
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
